@@ -6,8 +6,8 @@ public class GoodThings {
 			"즐거움"
 			, "성취감"
 			, "매우 간단하게"
-			, "명확하"
-			, "불안함을 극복하여 지루함이 "
+			, "명확함"
+			, "불안함을 극복하여 지루함이 됨"
 	};
 	
 	public String[] getGoodThings () {
