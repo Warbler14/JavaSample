@@ -10,6 +10,7 @@ public class GoodThings {
 			, "불안함을 극복하여 지루함이 됨"
 			, "단정한"
 			, "부담이 없는"
+			, "시간 절약"
 	};
 	
 	public String[] getGoodThings () {
