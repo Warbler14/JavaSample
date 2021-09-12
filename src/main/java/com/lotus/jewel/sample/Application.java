@@ -31,5 +31,7 @@ public class Application {
 			
 			dateList.add(cal.getTime());
 		}
+		
+		System.out.println("end of line");
 	}
 }
