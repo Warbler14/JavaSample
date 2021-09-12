@@ -9,6 +9,7 @@ public class GoodThings {
 			, "명확함"
 			, "불안함을 극복하여 지루함이 됨"
 			, "단정한"
+			, "부담이 없는"
 	};
 	
 	public String[] getGoodThings () {
