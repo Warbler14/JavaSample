@@ -74,7 +74,7 @@ public class TestMain {
 		
 	}
 	
-	public static void printFieldTest(FieldTest fieldTest) throws IllegalAccessException {
+	public static <T> void printFieldTest(T fieldTest) throws IllegalAccessException {
 		Field [] fields = fieldTest.getClass().getDeclaredFields();
 		for (Field field : fields) {
 			StringInjector stringInjector = field.getAnnotation(StringInjector.class);
