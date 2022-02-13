@@ -1,4 +1,4 @@
-package com.lotus.jewel.sample;
+package com.lotus.jewel.sample.mind;
 
 public class GoodThings {
 
