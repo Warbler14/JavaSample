@@ -17,8 +17,10 @@ public class TestOfList {
 		
 
 		ArrayListBasic arrayListBasic = new ArrayListBasic();
-		arrayListBasic.test01();
-		arrayListBasic.test02();
+		//arrayListBasic.test01();
+		//arrayListBasic.test02();
+		//arrayListBasic.test03();
+		arrayListBasic.test04();
 		
 //		new LinkedListBasic().test01();
 //		
