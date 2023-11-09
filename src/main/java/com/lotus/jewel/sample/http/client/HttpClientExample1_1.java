@@ -15,10 +15,18 @@ public class HttpClientExample1_1 {
 
     public static void main(String[] args) {
 
+        try {
+            doRequest();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void doRequest() throws IOException {
+
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         try {
-
             HttpGet request = new HttpGet("https://httpbin.org/get");
 
             // add request headers
@@ -44,14 +52,9 @@ public class HttpClientExample1_1 {
             } finally {
                 response.close();
             }
-        }catch (IOException e) {
 
         } finally {
-            try {
-                httpClient.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            httpClient.close();
         }
     }
 }
