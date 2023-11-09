@@ -17,7 +17,9 @@ public class BasicRuntime {
         System.out.println("pid : " + pid);
 
         //taskKill(pid);
-        processRun("chcp " + CODE_PAGE_UTF8 + " && taskkill /f /pid "+ pid);
+        if (pid != null && pid.length() > 0) {
+            processRun("chcp " + CODE_PAGE_UTF8 + " && taskkill /f /pid "+ pid);
+        }
     }
 
     private static String findKillPid(String type, Integer port) {
