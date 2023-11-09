@@ -22,7 +22,9 @@ public class HttpClientExample1_2 {
         }
     }
 
+    //Close with try-with-resources
     public static void doRequest() throws IOException {
+
         HttpGet request = new HttpGet("https://httpbin.org/get");
 
         // add request headers

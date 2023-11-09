@@ -22,6 +22,7 @@ public class HttpClientExample1_1 {
         }
     }
 
+    //Close manually.
     public static void doRequest() throws IOException {
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
