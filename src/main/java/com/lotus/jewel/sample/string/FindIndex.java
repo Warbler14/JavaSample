@@ -11,6 +11,18 @@ public class FindIndex {
 //        test(test2);
 
         System.out.println(test2.substring(test2.indexOf(".")));
+
+        String data[] = new String[0];
+        System.out.println(data.length);
+        for(String d : data) {
+            System.out.println("...");
+        }
+
+//        Boolean test = null;
+//        if (! test){
+//            System.out.println("null");
+//        }
+
     }
 
     private static void test(String testString) {

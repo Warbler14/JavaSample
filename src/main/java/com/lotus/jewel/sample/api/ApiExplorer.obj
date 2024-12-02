@@ -1,0 +1,41 @@
+/* Objective-C 샘플 코드 */
+
+
+#import <Foundation/Foundation.h>
+#import <CoreFoundation/CoreFoundation.h>
+
+    @implementation NSString (URLEncoding)
+        //function used to encode query and matrix parameters
+        -(NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding {
+            return (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+                (CFStringRef)self,
+                NULL,
+                (CFStringRef)@"!*'();:@&=+$,/?%#[]% ",
+                CFStringConvertNSStringEncodingToEncoding(encoding));
+        }
+    @end
+
+    int main (int argc, const char * argv[])
+    {
+        @autoreleasepool {
+            NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+            NSString *endpoint = [NSString stringWithFormat:@"http://apis.data.go.kr/B551505/whois/ipas_country_code"]; /*URL*/
+            NSString *queryParams = [NSString stringWithFormat:@"?%@&%@&%@&%@",
+                [NSString stringWithFormat:@"%@=%@", [@"serviceKey" urlEncodeUsingEncoding:NSUTF8StringEncoding], [@"서비스키" urlEncodeUsingEncoding:NSUTF8StringEncoding]]
+                , [NSString stringWithFormat:@"%@=%@", [@"serviceKey" urlEncodeUsingEncoding:NSUTF8StringEncoding], [@"-" urlEncodeUsingEncoding:NSUTF8StringEncoding]]
+                , [NSString stringWithFormat:@"%@=%@", [@"query" urlEncodeUsingEncoding:NSUTF8StringEncoding], [@"202.30.50.51" urlEncodeUsingEncoding:NSUTF8StringEncoding]]
+                , [NSString stringWithFormat:@"%@=%@", [@"answer" urlEncodeUsingEncoding:NSUTF8StringEncoding], [@"xml" urlEncodeUsingEncoding:NSUTF8StringEncoding]]];
+            [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",endpoint,queryParams]]];
+            [request setHTTPMethod:@"GET"];
+
+            NSHTTPURLResponse *urlResponse = nil;
+            NSError *error = [[NSError alloc] init];
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&urlResponse error:&error];
+            NSString *result = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"Response Code: %d", [urlResponse statusCode]);
+            if ([urlResponse statusCode] >= 200 && [urlResponse statusCode] < 300) {
+                NSLog(@"Response: %@", result);
+            }
+            return 0;
+    }
+}
