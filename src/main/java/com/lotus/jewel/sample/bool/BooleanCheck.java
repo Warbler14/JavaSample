@@ -5,11 +5,31 @@ import java.util.Random;
 public class BooleanCheck {
     public static void main(String[] args) {
 
-       int loop = 100;
-       while(loop-- > 0){
-           test();
-       }
+//       int loop = 100;
+//       while(loop-- > 0){
+//           test();
+//       }
 
+        test1();
+
+    }
+
+    public static void test1() {
+        System.out.println(checker("a"));
+        System.out.println(checker("b"));
+        System.out.println(checker("c"));
+    }
+
+    public static boolean checker(String code) {
+        boolean result = true;
+
+        if ("a".equals(code)) {
+            result = false;
+        } else if ("b".equals(code)) {
+            result = false;
+        }
+
+        return result;
     }
 
     public static void test() {

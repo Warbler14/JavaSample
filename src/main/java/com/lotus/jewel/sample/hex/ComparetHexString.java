@@ -1,22 +1,77 @@
 package com.lotus.jewel.sample.hex;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.util.stream.IntStream;
 
 public class ComparetHexString {
 
-    private static final char[] DIGITS_LOWER_OLD = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
-
     static final char[] DIGITS_LOWER = "0123456789abcdef".toCharArray(); // Unnecessarily redefined for every call.
+
+    public static final int maxRun = 10000;
 
     public static void main(String[] args) {
 
         LocalDate currentDate = LocalDate.now();
         String testString = currentDate.toString();
+
+
         System.out.println(testString);
-        System.out.println(encodeHexString(testString.getBytes()));
-        System.out.println(encodeHexString2(testString.getBytes()));
-        System.out.println(bytesToHexString(testString.getBytes()));
+
+        speedTest(new Thread() {
+            @Override
+            public void run() {
+                System.out.println(encodeHexString(testString.getBytes()));
+                IntStream.range(0, maxRun).forEach(i -> {
+                    encodeHexString(testString.getBytes());
+                });
+            }
+        }, "encodeHexString");
+
+        speedTest(new Thread(()-> {
+            System.out.println(encodeHexString2(testString.getBytes()));
+            IntStream.range(0, maxRun).forEach(i -> {
+                encodeHexString2(testString.getBytes());
+            });
+        }), "encodeHexString2");
+
+        speedTest(new Thread(()-> {
+            System.out.println(bytesToHexString(testString.getBytes()));
+            IntStream.range(0, maxRun).forEach(i -> {
+                bytesToHexString(testString.getBytes());
+            });
+        }), "bytesToHexString");
+
+        speedTest(new Thread(()-> {
+            System.out.println(bytesToHexString2(testString.getBytes()));
+            IntStream.range(0, maxRun).forEach(i -> {
+                bytesToHexString2(testString.getBytes());
+            });
+        }), "bytesToHexString2");
+
     }
+
+
+    private static void speedTest(Thread thread, String taskName) {
+
+        Instant beforeTime = Instant.now();  // 코드 실행 전에 시간 받아오기
+
+        thread.start();
+
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        Instant afterTime = Instant.now();
+        long diffTime = Duration.between(beforeTime, afterTime).toMillis(); // 두 개의 실행 시간
+        System.out.println(taskName + " 실행 시간(ms): " + diffTime);
+
+    }
+
+
 
     private static String encodeHexString(final byte[] data) {
         final int dataLength = data.length;
@@ -45,6 +100,21 @@ public class ComparetHexString {
         }
 
         StringBuffer buffer = new StringBuffer();
+
+        for (byte b : bytes) {
+            buffer.append(String.format("%02x", b));
+        }
+
+        return buffer.toString();
+    }
+
+    private static String bytesToHexString2(byte[] bytes) {
+
+        if (bytes == null) {
+            return "";
+        }
+
+        StringBuilder buffer = new StringBuilder();
 
         for (byte b : bytes) {
             buffer.append(String.format("%02x", b));
