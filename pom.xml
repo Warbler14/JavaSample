@@ -35,6 +35,11 @@
 			<version>2.12.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.18.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -59,6 +64,14 @@
 			<artifactId>java-uuid-generator</artifactId>
 			<version>5.1.0</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.owasp.esapi/esapi -->
+		<dependency>
+			<groupId>org.owasp.esapi</groupId>
+			<artifactId>esapi</artifactId>
+			<version>2.6.0.0</version>
+		</dependency>
+
 
 		<!-- junit -->
 		<!--
@@ -127,14 +140,14 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.5</version>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version> <!-- 최신 버전 사용 권장 -->
+				<configuration>
+					<release>21</release> <!-- ✅ 이게 가장 권장되는 방식 -->
+				</configuration>
+			</plugin>
         </plugins>
 	</build>
 </project>
