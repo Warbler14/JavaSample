@@ -10,4 +10,7 @@ public class PowerWords {
 	public String[] getPowerWords () {
 		return powerWords;
 	}
+
+
+
 }
